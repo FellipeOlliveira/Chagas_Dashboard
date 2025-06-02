@@ -1,5 +1,6 @@
 #THIS SCRIPT ONLY WORK FOR LINUX
 #Cause pysus libary can only be downloaded on linux env
+# You use WSL to run this script if you don't have linux main system
 
 #from pysus.online_data import SINAN
 #import pandas as pd
