@@ -48,6 +48,7 @@ class Utilities:
         '1': 'Confirmado'
         , '2': 'Descartado'
         , '3': 'Inconclusivo'
+        , '8':'Inconclusivo'
     }
 
     category_CRITERIO = {
@@ -68,24 +69,18 @@ class Utilities:
 
     def get_files_path_chagas(self) ->list:
         return [
-            os.path.abspath(os.path.join("Bases_Chagas", base_diretory))
-            for base_diretory in os.listdir("Bases_Chagas")
+            os.path.abspath(os.path.join("SINAN_CHAGAS_ANO", base_diretory))
+            for base_diretory in os.listdir("SINAN_CHAGAS_ANO")
         ]
 
-
     def extract_dim_municipios(self):
-        df = pd.read_excel("RELATORIO_DTB_BRASIL_MUNICIPIO.xlsx"
-                             ,skiprows=6
+        df = pd.read_csv("Dim_Municipios_Pa.csv"
+                             ,delimiter=';'
                              )
 
-        df = df.rename(columns={
-            'UF': 'uf'
-            ,'Nome_UF':'nome_uf'
-            , 'Código Município Completo': 'cod_mun'
-        })
-        df['uf'] = df['uf'].astype(str)
+        df['CD_MUN'] = df['CD_MUN'].astype(str)
+        df['CD_UF'] = df['CD_UF'].astype(str)
 
-        df['sigla'] = df['nome_uf'].map(self.acronym_states)
 
         return df
 
@@ -97,4 +92,4 @@ class Utilities:
 
 
 if __name__ == '__main__':
-    ...
+    Utilities().extract_dim_municipios()
